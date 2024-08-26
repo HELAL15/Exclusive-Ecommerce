@@ -103,8 +103,10 @@ const ProductDetails: FC<IProps> = () => {
                           className="sr-only peer"
                         />
                         <span
-                          className={`w-5 h-5 block bg-[${colorOption.value}] peer-checked:border-2 peer-checked:border-primary-white peer-checked:outline-primary peer-checked:outline peer-checked:outline-2  rounded-full`}
-                          
+                          className={`w-5 h-5 block  peer-checked:border-2 peer-checked:border-primary-white peer-checked:outline-primary peer-checked:outline peer-checked:outline-2  rounded-full`}
+                          style={{
+                            backgroundColor: colorOption.value,
+                          }}
                         ></span>
                       </label>
                     ))}
