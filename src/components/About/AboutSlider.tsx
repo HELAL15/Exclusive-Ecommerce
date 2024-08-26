@@ -6,7 +6,6 @@ import { FaTwitter } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 
-import "../../StylesSwiper/pagination.css";
 
 export default function AboutSlider() {
   return (

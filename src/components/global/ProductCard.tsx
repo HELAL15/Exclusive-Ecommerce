@@ -37,7 +37,7 @@ const ProductCard: FC<IProps> = ({ }) => {
       <div className="card rounded-[4px] relative group">
         <div className="absolute right-3 top-3 z-20 flex flex-col gap-2">
           <button onClick={handleFav} className={`rounded-full w-[32px] h-[32px] grid place-items-center ${isFav ? 'bg-accent text-primary-white' : 'bg-primary-white'} `}><FaRegHeart /></button>
-          <Link to={`/product-details/${1}`} onClick={handleCart} className="rounded-full w-[32px] h-[32px] grid place-items-center bg-primary-white"><IoEyeOutline /></Link>
+          <Link to={`/shop/${1}`} onClick={handleCart} className="rounded-full w-[32px] h-[32px] grid place-items-center bg-primary-white"><IoEyeOutline /></Link>
         </div>
         <div className="">
           <div className="card-image relative z-10 bg-light h-[250px] flex items-center justify-center rounded-[4px] overflow-hidden">

@@ -16,7 +16,7 @@ const FactCard: FC<IProps> = ({ img , title , body }) => {
 
   return (
     <>
-      <div className="card">
+      <div className="card last:md:col-span-3 last:lg:col-span-1 last:mt-0 last:md:mt-16 last:lg:mt-0">
         <div className="card-img w-[50px] h-[50px] grid place-items-center outline-8 outline outline-gray-400 mx-auto bg-primary rounded-full ">
           <img src={img} alt="Fact" className="w-[40px] h-[40px] object-contain relative z-10" />
         </div>
