@@ -29,7 +29,8 @@ const Header: FC<IProps> = ({  }) => {
       <header className="bg-primary py-3">
         <div className="container relative">
           <div className="flex items-center justify-start md:justify-center  ">
-            <Marquee pauseOnHover className=" w-3/4 md:w-1/2">
+            <div className="w-3/4 md:w-1/2">
+            <Marquee pauseOnHover >
               <div className="flex items-center justify-center gap-2 ">
                 <p className="text-sm font-normal text-primary-white">
                   Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
@@ -37,6 +38,7 @@ const Header: FC<IProps> = ({  }) => {
                 <Link className="text-primary-white underline text-sm font-semibold" to={'/'}>shop now</Link>
               </div>
             </Marquee>
+            </div>
           </div>
           <Select
             defaultValue="en"
