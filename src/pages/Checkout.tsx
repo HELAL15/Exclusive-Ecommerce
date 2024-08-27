@@ -2,7 +2,6 @@ import { FC, memo } from "react";
 import BreadCrumb from "../components/global/BreadCrumb";
 import { SubmitHandler, useForm } from "react-hook-form";
 import product from '../assets/main-product.png'
-// import Test from "./Test";
 
 /**
  * ==> props interface
@@ -167,7 +166,7 @@ const Checkout: FC<IProps> = ({  }) => {
                     <input type="radio" name="payment" id="bank" className="accent-primary w-5 h-5 cursor-pointer" />
                     <label htmlFor="bank" className="text-base font-normal cursor-pointer">bank</label>
                   </div>
-                  {/* <Test/> */}
+                  
                   <div className="flex items-center gap-2">
                     <input type="radio" name="payment" id="cash" className="accent-primary w-5 h-5 cursor-pointer" />
                     <label htmlFor="cash" className="text-base font-normal cursor-pointer">Cash on delivery</label>
@@ -185,7 +184,7 @@ const Checkout: FC<IProps> = ({  }) => {
           </div>
         </div>
       </section>
-      {/* <Test/> */}
+      
     </>
   );
 }

@@ -11,36 +11,13 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
  */
 interface IProps {
   fav?:boolean,
-  product?:{
-    id: number,
-    name: string,
-    price: number,
-    discount: number,
-    rate: number,
-    reviews: number,
-    image: string,
-    category: string,
-    description: string,
-    colors: string[],
-    sizes: string[],
-    tags: string[],
-    sale: boolean,
-    new: boolean,
-    stock: number,
-    brand: string,
-    sku: string,
-    weight: string,
-    dimensions: string,
-    shipping: string,
-    rating: number,
-    gallery: string[],
-  }
+
 }
 
 /**
  * ==> Component
  */
-const ProductCard: FC<IProps> = ({ product }) => {
+const ProductCard: FC<IProps> = ({  }) => {
 
   const [isFav , setFav] = useState(false)
   const [inCart , setCart] = useState(false)
