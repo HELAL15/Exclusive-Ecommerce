@@ -2,7 +2,7 @@ import { FC, memo } from "react";
 import BreadCrumb from "../components/global/BreadCrumb";
 import { SubmitHandler, useForm } from "react-hook-form";
 import product from '../assets/main-product.png'
-import Test from "./Test";
+// import Test from "./Test";
 
 /**
  * ==> props interface
