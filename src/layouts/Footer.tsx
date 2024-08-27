@@ -28,9 +28,9 @@ const Footer: FC<IProps> = ({  }) => {
             <h3 className="text-primary-white font-medium text-xl">exclusive</h3>
             <div>
               <h3 className="text-primary-white my-4">subscribe</h3>
-              <form action="" className="flex items-center justify-between border border-light px-3 py-2 rounded-[4px]">
-                <input type="text" placeholder="Enter your email" className="bg-transparent placeholder:text-sm border-0 outline-0 focus:border-0 focus:outline-0" />
-                <button type="submit" className="text-xl text-primary-white"><VscSend /></button>
+              <form action="" className="flex items-center text-primary-white justify-center border border-light px-4 py-2 rounded-[4px]">
+                <input type="text" placeholder="Enter your email" className="bg-transparent text-primary-white placeholder:text-sm border-0 outline-0 focus:border-0 focus:outline-0" />
+                <button type="submit" className="text-lg text-primary-white flex-grow"><VscSend /></button>
               </form>
             </div>
           </div>

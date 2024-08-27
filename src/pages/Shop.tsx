@@ -13,6 +13,8 @@ interface IProps {
  * ==> Component
  */
 const Shop: FC<IProps> = ({  }) => {
+
+  
   return (
     <>
             <section className="pt-0">

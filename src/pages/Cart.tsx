@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
 import BreadCrumb from "../components/global/BreadCrumb";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import product from '../assets/main-product.png'
 import { IoCloseSharp } from "react-icons/io5";
 
@@ -13,6 +13,12 @@ interface IProps {}
  * ==> Component
  */
 const Cart: FC<IProps> = () => {
+
+  const navigate = useNavigate()
+
+  const handleCheckout = () => {
+    navigate('/checkout')
+  }
 
 
   return (
@@ -104,7 +110,7 @@ const Cart: FC<IProps> = () => {
                 </div>
               </div>
               <div className="flex items-center justify-center mt-4">
-                <button className="btn btn-primary w-fit ">proceed to checkout</button>
+                <button onClick={handleCheckout} className="btn btn-primary w-fit ">proceed to checkout</button>
               </div>
             </div>
           </div>

@@ -2,12 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 *{
   @apply p-0 m-0 ;
   box-sizing: border-box;
   scroll-behavior: smooth;
-  text-transform: capitalize
+  text-transform: capitalize;
+  font-family: "Poppins", sans-serif;
 }
 
 section{
@@ -15,6 +17,18 @@ section{
 
 }
 
+.package{
+  @apply space-y-2;
+}
+
+.label{
+  @apply text-base text-black font-normal;
+}
+
+
+.input{
+  @apply w-full bg-light px-4 py-3 rounded outline-none border border-transparent focus:border-accent;
+}
 
 .btn{
   @apply  py-4 px-9 rounded-[4px] my-1 capitalize font-medium text-base;
@@ -22,12 +36,12 @@ section{
 }
 
 .btn-primary{
-  @apply bg-accent hover:bg-accent-hover text-white;
+  @apply bg-accent capitalize hover:bg-accent-hover text-white;
 
 }
 
 .nav-link{
-  @apply text-base font-medium text-black duration-300 pb-1;
+  @apply text-base text-center font-normal text-black duration-300 pb-1;
 }
 .nav-link:hover{
   @apply text-accent;
@@ -35,6 +49,17 @@ section{
 
 .nav-link.active{
   @apply text-accent  relative before:absolute before:bottom-0 before:w-full before:h-[1px] before:bg-black;
+
+}
+.profile-link{
+  @apply text-base block w-fit font-normal text-gray-400 duration-300 pb-1;
+}
+.profile-link:hover{
+  @apply text-accent;
+}
+
+.profile-link.active{
+  @apply text-accent relative;
 
 }
 
@@ -78,3 +103,25 @@ section{
   margin-bottom: 0rem !important;
 
 }
+
+
+.select-lang .ant-select-selector ,.select-lang.ant-select-open input{
+  @apply bg-transparent border-none text-primary-white  !important;
+}
+
+.select-lang .ant-select-arrow{
+  @apply text-primary-white !important;
+}
+
+
+.select-lang.ant-select-open .ant-select-selection-item {
+  @apply text-primary-white !important; 
+}
+
+.ant-select-item.ant-select-item-option.ant-select-item-option-selected{
+  @apply bg-accent/70 hover:bg-accent/70 text-primary-white !important;
+}
+.ant-select-item.ant-select-item-option{
+  @apply hover:bg-accent/20 !important;
+}
+

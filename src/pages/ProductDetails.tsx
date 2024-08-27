@@ -132,13 +132,13 @@ const ProductDetails: FC<IProps> = () => {
                     ))}
                   </div>
                 </div>
-                <div className="flex items-center flex-wrap gap-4">
+                <div className="flex items-center flex-wrap gap-3">
                   <div className="amount text-2xl h-[44px] overflow-hidden items-center w-full xl:w-[160px] grid grid-cols-4 rounded border border-slate-300">
                     <button disabled={amount === 1} onClick={counter.decrement} className="text-center disabled:bg-gray-300 disabled:hover:bg-gray-300 disabled:hover:text-primary disabled:cursor-not-allowed h-full duration-300 hover:bg-accent hover:text-primary-white border-r border-r-slate-300">-</button>
                     <span className="col-span-2 text-center">{amount}</span>
                     <button disabled={maxAmount} onClick={counter.increment} className="text-center disabled:bg-gray-300 disabled:hover:bg-gray-300 disabled:hover:text-primary disabled:cursor-not-allowed h-full duration-300 hover:bg-accent hover:text-primary-white border-l border-l-slate-300">+</button>
                   </div>
-                  <button className="rounded px-12 flex-grow xl:flex-grow-0 h-[44px] duration-300 bg-accent hover:bg-accent-hover text-primary-white ">buy now</button>
+                  <button className="rounded px-12 flex-grow xl:flex-grow-0 h-[44px] duration-300 btn-primary ">buy now</button>
                   <button className="rounded h-[44px] w-[44px] grid place-items-center duration-300 text-xl border hover:border-transparent border-slate-300 hover:bg-accent hover:text-primary-white "><i><FaRegHeart /></i></button>
                 </div>
               </div>

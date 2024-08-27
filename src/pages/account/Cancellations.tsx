@@ -10,7 +10,7 @@ interface IProps {
 /**
  * ==> Component
  */
-const Profile: FC<IProps> = ({  }) => {
+const Cancellations: FC<IProps> = ({  }) => {
   return (
     <>
 
@@ -18,4 +18,4 @@ const Profile: FC<IProps> = ({  }) => {
   );
 }
 
-export default memo(Profile);
+export default memo(Cancellations);

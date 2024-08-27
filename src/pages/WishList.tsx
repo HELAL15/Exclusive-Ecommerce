@@ -36,9 +36,9 @@ const Wishlist: FC<IProps> = ({  }) => {
 
       <section>
         <div className="container">
-          <div className="flex items-center justify-between gap-4 mb-8">
+          <div className="flex items-center justify-between gap-4">
             <SecTitle title="just for you" />
-            <Link to={'/products'} className="rounded px-8 py-2 duration-300 hover:bg-primary hover:text-primary-white border border-primary">view all</Link>
+            <Link to={'/shop'} className="rounded mb-8 px-8 py-2 duration-300 hover:bg-primary hover:text-primary-white border border-primary">view all</Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             <ProductCard/>

@@ -14,6 +14,13 @@ import ResetPassword from "./pages/auth/ResetPassword";
 import Shop from "./pages/Shop";
 import ProductDetails from "./pages/ProductDetails";
 import WishList from "./pages/WishList";
+import Profile from "./pages/account/Profile";
+import ProfileOutlet from "./pages/account/ProfileOutlet";
+import AddressBook from "./pages/account/AddressBook";
+import PaymentOption from "./pages/account/PaymentOption";
+import Returns from "./pages/account/Returns";
+import Cancellations from "./pages/account/Cancellations";
+import Checkout from "./pages/Checkout";
 
 
 
@@ -34,6 +41,16 @@ function App() {
         <Route path="/shop" element={<Shop/>}/>
         <Route path="/shop/:id" element={<ProductDetails/>}/>
         <Route path="/wishlist" element={<WishList/>}/>
+        <Route path="/checkout" element={<Checkout/>}/>
+        {/* account routes */}
+        <Route  element={<ProfileOutlet/>}>
+          <Route path="/profile" element={<Profile/>}/>
+          <Route path="/profile/address" element={<AddressBook/>}/>
+          <Route path="/profile/payment-option" element={<PaymentOption/>}/>
+          <Route path="/profile/returns" element={<Returns/>}/>
+          <Route path="/profile/cancellation" element={<Cancellations/>}/>
+        </Route>
+        {/* auth routes */}
         <Route path="/login" element={<Login/>}/>
         <Route path="/sign-up" element={<Register/>}/>
         <Route path="/forget-password" element={<ForgetPassword/>}/>
