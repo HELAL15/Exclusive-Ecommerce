@@ -5,6 +5,7 @@ module.exports = {
     // fontFamily: {
     //   primary: '"Exo 2"',
     // },
+
     container: {
       center: true,
       padding: {
@@ -22,6 +23,11 @@ module.exports = {
       'xl': '1280px',
     },
     extend: {
+      maxHeight: {
+        '0': '0',
+        'full': '100vh', 
+      },
+
       colors: {
         body:'#FFFFFF',
         primary: {

@@ -1,7 +1,98 @@
-import { FC, memo } from "react";
+import { ChangeEvent, FC, memo, useState } from "react";
 import BreadCrumb from "../components/global/BreadCrumb";
 import { SubmitHandler, useForm } from "react-hook-form";
 import product from '../assets/main-product.png'
+import { loadStripe } from '@stripe/stripe-js';
+import {
+  PaymentElement,
+  Elements,
+  useStripe,
+  useElements,
+} from '@stripe/react-stripe-js';
+
+/**
+ * ==> Stripe initialization
+ */
+const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
+
+/**
+ * ==> Options for Elements
+ */
+const options:any = {
+  mode: 'payment',
+  amount: 1099,
+  currency: 'usd',
+  appearance: {
+    /* Custom styling here */
+  },
+};
+
+
+
+
+
+
+
+const CheckoutForm: FC = () => {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!elements || !stripe) {
+      return;
+    }
+
+    // Trigger form validation and wallet collection
+    const { error: submitError }:any = await elements.submit();
+    if (submitError) {
+      setErrorMessage(submitError.message);
+      return;
+    }
+
+    // Create the PaymentIntent and obtain clientSecret from your server endpoint
+    const res = await fetch('/create-intent', {
+      method: 'POST',
+    });
+
+    const { client_secret: clientSecret }:any = await res.json();
+
+    const { error }:any = await stripe.confirmPayment({
+      elements,
+      clientSecret,
+      confirmParams: {
+        return_url: 'https://example.com/order/123/complete',
+      },
+    });
+
+    if (error) {
+      setErrorMessage(error.message);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <PaymentElement />
+      <button type="submit" disabled={!stripe || !elements}>
+        Pay
+      </button>
+      {errorMessage && <div className="text-red-500 mt-4">{errorMessage}</div>}
+    </form>
+  );
+};
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * ==> props interface
@@ -31,6 +122,16 @@ const Checkout: FC<IProps> = ({  }) => {
     console.log(data);
     // Add your submit logic here
   };
+
+  const [method , setMethod] = useState<string>('cash')
+
+const handleMethodChange = (e:ChangeEvent<HTMLInputElement>) =>{
+  setMethod(e.target.value)
+}
+
+
+
+
   return (
     <>
       <section className="pt-0">
@@ -162,13 +263,24 @@ const Checkout: FC<IProps> = ({  }) => {
                   </div>
                 </div>
                 <div className="flex flex-col gap-3 mt-6">
-                  <div className="flex items-center gap-2">
-                    <input type="radio" name="payment" id="bank" className="accent-primary w-5 h-5 cursor-pointer" />
-                    <label htmlFor="bank" className="text-base font-normal cursor-pointer">bank</label>
+                  <div className="f">
+                    <div className="flex items-center gap-2">
+                      <input 
+                        checked={method === 'bank'}
+                        onChange={handleMethodChange} value="bank" type="radio" name="payment" id="bank" className="accent-primary w-5 h-5 cursor-pointer" />
+                      <label htmlFor="bank" className="text-base font-normal cursor-pointer">bank</label>
+                    </div>
+                    <div className={`duration-300 overflow-hidden ${method === "bank" ? "max-h-full" : "max-h-0"}`}>
+                    <Elements stripe={stripePromise} options={options}>
+                      <CheckoutForm />
+                    </Elements>
+                    </div>
                   </div>
                   
                   <div className="flex items-center gap-2">
-                    <input type="radio" name="payment" id="cash" className="accent-primary w-5 h-5 cursor-pointer" />
+                    <input
+                      checked={method === 'cash'}
+                      onChange={handleMethodChange} value="cash" type="radio" name="payment" id="cash" className="accent-primary w-5 h-5 cursor-pointer" />
                     <label htmlFor="cash" className="text-base font-normal cursor-pointer">Cash on delivery</label>
                   </div>
                 </div>

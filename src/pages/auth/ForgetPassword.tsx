@@ -35,7 +35,7 @@ const ForgetPassword: FC = () => {
     <>
       <section>
         <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4">
-          <div className="bg-[#CBE4E8] aspect-[12/9]">
+          <div className="bg-[#CBE4E8] aspect-[12/9] hidden md:block">
             <img
               src={login}
               alt="Forget Password"

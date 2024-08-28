@@ -26,7 +26,7 @@ const ForgetPassword: FC = () => {
     <>
       <section>
         <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4">
-          <div className="bg-[#CBE4E8] aspect-[12/9]">
+          <div className="bg-[#CBE4E8] aspect-[12/9] hidden md:block">
             <img
               src={login}
               alt="Forget Password"
@@ -45,7 +45,7 @@ const ForgetPassword: FC = () => {
                 <div className="grid grid-cols-12 gap-4">
                   {/* Email Field */}
                   <div className="col-span-12 grid place-items-center">
-                    <OTP length={4} className="outline-none focus:border-accent" />
+                    <OTP length={4} className="outline-none focus:border-accent w-full" />
                   </div>
 
                   {/* Submit Button */}

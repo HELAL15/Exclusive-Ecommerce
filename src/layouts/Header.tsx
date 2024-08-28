@@ -1,10 +1,11 @@
-import { FC, memo } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { FC, FormEvent, memo, useEffect, useState } from "react";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaBars, FaRegHeart, FaSearch } from "react-icons/fa";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { LuUser } from "react-icons/lu";
 import { Select } from "antd";
 import Marquee from "react-fast-marquee";
+import MobileMenu from "../components/header/MobileMenu";
 
 /**
  * ==> props interface
@@ -18,9 +19,33 @@ interface IProps {
  */
 const Header: FC<IProps> = ({  }) => {
 
+  const [isOpen , setOpen] = useState<boolean>(false);
+  const [searchValue, setSearchValue] = useState<string>('');
+
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const handleOpen = ()=>{
+    setOpen(true)
+  }
+
+  useEffect(()=>{
+    setOpen(false)
+  },[location])
+
+
+const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
+  e.preventDefault()
+  navigate(`/shop?search=${searchValue}`)
+  setSearchValue('')
+}
+
+
+
   const {Option} = Select
 
   const handleOptionChange = (value: any) => {
+    window.location.reload();
     console.log(`selected ${value}`)
   }
 
@@ -58,7 +83,7 @@ const Header: FC<IProps> = ({  }) => {
               <Link to="/">exclusive</Link>
             </div>
             <nav className="nav hidden lg:block">
-              <ul className="flex items-center gap-8">
+              <ul className="flex items-center gap-5 xl:gap-8">
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/">home</NavLink>
                 </li>
@@ -76,21 +101,26 @@ const Header: FC<IProps> = ({  }) => {
                 </li>
               </ul>
             </nav>
+            <div className="block lg:hidden">
+              <MobileMenu isOpen={isOpen} setOpen={setOpen} />
+            </div>
             <div className="flex items-center gap-6">
-              <form action="" className="hidden lg:flex items-center bg-light px-3 py-2 rounded-[4px]">
-                <input type="text" placeholder="What are you looking for?" className="bg-transparent placeholder:text-sm border-0 outline-0 focus:border-0 focus:outline-0" />
+              <form  onSubmit={handleSubmit} className="hidden lg:flex items-center bg-light px-3 py-2 rounded-[4px]">
+                <input
+                  onChange={(e) => setSearchValue(e.target.value)}
+                  value={searchValue} type="search" placeholder="What are you looking for?" className="bg-transparent placeholder:text-sm border-0 outline-0 focus:border-0 focus:outline-0" />
                 <button type="submit" className="text-xl "><FaSearch /></button>
               </form>
-              <Link className=" text-lg md:text-xl font-medium  " to={'/wishlist'}>
+              <NavLink className=" text-lg md:text-xl font-medium " to={'/wishlist'}>
                 <i><FaRegHeart /></i>
-              </Link>
-              <Link className="text-lg md:text-xl font-medium relative after:content-['2'] after:text-primary-white after:text-sm after:grid after:place-items-center after:absolute after:-top-2 after:-right-2 after:bg-accent after:w-4 after:h-4 after:rounded-full" to={'/cart'}>
+              </NavLink>
+              <NavLink className="text-lg md:text-xl font-medium relative after:content-['2'] after:text-primary-white after:text-sm after:grid after:place-items-center after:absolute after:-top-2 after:-right-2 after:bg-accent after:w-4 after:h-4 after:rounded-full" to={'/cart'}>
                 <i><AiOutlineShoppingCart /></i>
-              </Link>
-              <Link className="text-lg md:text-xl font-medium" to={'/profile'}>
+              </NavLink>
+              <NavLink className="text-lg md:text-xl font-medium" to={'/profile'}>
                 <i><LuUser /></i>
-              </Link>
-              <button className=" block lg:hidden text-lg md:text-xl bg-transparent border-0 outline-0">
+              </NavLink>
+              <button onClick={handleOpen} className=" block lg:hidden text-lg md:text-xl bg-transparent border-0 outline-0">
               <FaBars />
               </button>
             </div>

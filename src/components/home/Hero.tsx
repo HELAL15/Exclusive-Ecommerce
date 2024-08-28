@@ -27,15 +27,15 @@ const Hero: FC<IProps> = ({  }) => {
           <div className="grid grid-cols-12 gap-4">
             <div className=" hidden lg:flex lg:col-span-3 border-r border-r-slate-300 pt-10 flex-col gap-4">
 
-              <Link to={'/'} className="text-base font-medium" >Woman’s Fashion</Link>
-              <Link to={'/'} className="text-base font-medium" >Men’s Fashion</Link>
-              <Link to={'/'} className="text-base font-medium" >Electronics</Link>
-              <Link to={'/'} className="text-base font-medium" >Home & Lifestyle</Link>
-              <Link to={'/'} className="text-base font-medium" >Medicine</Link>
-              <Link to={'/'} className="text-base font-medium" >Sports & Outdoor</Link>
-              <Link to={'/'} className="text-base font-medium" >Baby’s & Toys</Link>
-              <Link to={'/'} className="text-base font-medium" >Groceries & Pets</Link>
-              <Link to={'/'} className="text-base font-medium" >Health & Beauty</Link>
+              <Link to={`/shop?category=${1}`} className="text-base font-medium" >Woman’s Fashion</Link>
+              <Link to={`/shop?category=${2}`} className="text-base font-medium" >Men’s Fashion</Link>
+              <Link to={`/shop?category=${3}`} className="text-base font-medium" >Electronics</Link>
+              <Link to={`/shop?category=${4}`} className="text-base font-medium" >Home & Lifestyle</Link>
+              <Link to={`/shop?category=${5}`} className="text-base font-medium" >Medicine</Link>
+              <Link to={`/shop?category=${6}`} className="text-base font-medium" >Sports & Outdoor</Link>
+              <Link to={`/shop?category=${7}`} className="text-base font-medium" >Baby’s & Toys</Link>
+              <Link to={`/shop?category=${8}`} className="text-base font-medium" >Groceries & Pets</Link>
+              <Link to={`/shop?category=${9}`} className="text-base font-medium" >Health & Beauty</Link>
             </div>
             <div className="bg-primary col-span-12 lg:col-span-9 rounded px-4 lg:ml-8 py-8 mt-10">
               <Swiper

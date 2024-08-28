@@ -11,13 +11,24 @@ import 'swiper/css';
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from 'react-toastify';
+import { Flip, ToastContainer } from 'react-toastify';
 
 
 createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
     <Router>
-      <ToastContainer/>
+    <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        transition={Flip}
+        theme="dark"
+      />
         <App />
     </Router>
   </Provider>

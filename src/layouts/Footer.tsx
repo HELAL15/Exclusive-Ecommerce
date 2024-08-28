@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { ChangeEvent, FC, FormEvent, memo, useState } from "react";
 import { FaInstagram } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import qr from '../assets/Qrcode.png';
@@ -7,6 +7,7 @@ import playstore from '../assets/google-play.png';
 import { RiFacebookLine, RiLinkedinLine } from "react-icons/ri";
 import { FaXTwitter } from "react-icons/fa6";
 import { VscSend } from "react-icons/vsc";
+import { toast } from "react-toastify";
 
 /**
  * ==> props interface
@@ -19,69 +20,91 @@ interface IProps {
  * ==> Component
  */
 const Footer: FC<IProps> = ({  }) => {
+
+  const [mail , setMail] = useState('')
+
+  const handleMailChange = (e:ChangeEvent<HTMLInputElement>)=>{
+    setMail(e.target.value)
+  }
+
+  const handleSubmitMail = (e:FormEvent<HTMLFormElement>)=>{
+    e.preventDefault()
+    if(mail !==''){
+      toast.success(mail)
+    }
+    setMail('')
+  }
+
+
   return (
     <>
     <footer className="bg-primary py-8 pt-16 ">
       <div className="container">
-        <div className="grid grid-col-1 md:grid-cols-3 xl:grid-cols-5 gap-6">
+        <div className="grid grid-col-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 items-start">
           <div className="footer-col">
             <h3 className="text-primary-white font-medium text-xl">exclusive</h3>
             <div>
               <h3 className="text-primary-white my-4">subscribe</h3>
-              <form action="" className="flex items-center text-primary-white justify-center border border-light px-4 py-2 rounded-[4px]">
-                <input type="text" placeholder="Enter your email" className="bg-transparent text-primary-white placeholder:text-sm border-0 outline-0 focus:border-0 focus:outline-0" />
-                <button type="submit" className="text-lg text-primary-white flex-grow"><VscSend /></button>
+              <p className="text-primary-white text-sm font-normal mb-2">Get 10% off your first order</p>
+              <form 
+                onSubmit={handleSubmitMail}
+                action="" className="flex w-full md:w-[200px] items-center text-primary-white justify-between border border-light px-4 py-2 rounded-[4px]">
+                <input
+                  onChange={handleMailChange}
+                  value={mail}
+                  type="email" placeholder="Enter your email" className="bg-transparent w-3/4 text-primary-white placeholder:text-sm border-0 outline-0 focus:border-0 focus:outline-0" />
+                <button type="submit" className="text-lg text-primary-white "><VscSend /></button>
               </form>
             </div>
           </div>
           <div className="footer-col">
             <h3 className="text-white font-medium text-xl">support</h3>
             <ul className="footer-links flex flex-col gap-4 mt-4">
-              <li className="footer-link">
-                <Link target="_blank" to="111 Bijoy sarani, Dhaka,  DH 1515, Bangladesh." className="text-white ">111 Bijoy sarani, Dhaka,  DH 1515, Bangladesh.</Link>
+              <li className="footer-item">
+                <Link target="_blank" to="https://111 Bijoy sarani, Dhaka,  DH 1515, Bangladesh." className="footer-link ">111 Bijoy sarani, Dhaka,  DH 1515, Bangladesh.</Link>
               </li>
-              <li className="footer-link">
-                <Link target="_blank" to="mailto:exclusive@gmail.com" className="text-white ">exclusive@gmail.com</Link>
+              <li className="footer-item">
+                <Link target="_blank" to="mailto:exclusive@gmail.com" className="footer-link ">exclusive@gmail.com</Link>
               </li>
-              <li className="footer-link">
-                <Link target="_blank" to="tel:+88015-88888-9999" className="text-white ">+88015-88888-9999</Link>
+              <li className="footer-item">
+                <Link target="_blank" to="tel:+88015-88888-9999" className="footer-link ">+88015-88888-9999</Link>
               </li>
             </ul>
           </div>
           <div className="footer-col">
             <h3 className="text-white font-medium text-xl">account</h3>
             <ul className="footer-links flex flex-col gap-4 mt-4">
-              <li className="footer-link">
-                <NavLink to="/profile" className="text-white ">my account</NavLink>
+              <li className="footer-item">
+                <NavLink to="/profile" className="footer-link ">my account</NavLink>
               </li>
-              <li className="footer-link">
-                <NavLink to="/login" className="text-white ">login / sign up</NavLink>
+              <li className="footer-item">
+                <NavLink to="/login" className="footer-link ">login / sign up</NavLink>
               </li>
-              <li className="footer-link">
-                <NavLink to="/cart" className="text-white ">cart</NavLink>
+              <li className="footer-item">
+                <NavLink to="/cart" className="footer-link ">cart</NavLink>
               </li>
-              <li className="footer-link">
-                <NavLink to="/wishlist" className="text-white ">whishlist</NavLink>
+              <li className="footer-item">
+                <NavLink to="/wishlist" className="footer-link ">whishlist</NavLink>
               </li>
-              <li className="footer-link">
-                <NavLink to="/shop" className="text-white ">shop</NavLink>
+              <li className="footer-item">
+                <NavLink to="/shop" className="footer-link ">shop</NavLink>
               </li>
             </ul>
           </div>
           <div className="footer-col">
             <h3 className="text-white font-medium text-xl">quick links</h3>
             <ul className="footer-links flex flex-col gap-4 mt-4">
-              <li className="footer-link">
-                <NavLink to="/privacy" className="text-white ">privacy policy</NavLink>
+              <li className="footer-item">
+                <NavLink to="/privacy" className="footer-link ">privacy policy</NavLink>
               </li>
-              <li className="footer-link">
-                <NavLink to="/terms" className="text-white ">terms of us</NavLink>
+              <li className="footer-item">
+                <NavLink to="/terms" className="footer-link ">terms of us</NavLink>
               </li>
-              <li className="footer-link">
-                <NavLink to="/faq" className="text-white ">FAQ</NavLink>
+              <li className="footer-item">
+                <NavLink to="/faq" className="footer-link ">FAQ</NavLink>
               </li>
-              <li className="footer-link">
-                <NavLink to="/contact" className="text-white ">contact</NavLink>
+              <li className="footer-item">
+                <NavLink to="/contact" className="footer-link ">contact</NavLink>
               </li>
             </ul>
           </div>

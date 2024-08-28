@@ -21,6 +21,9 @@ import PaymentOption from "./pages/account/PaymentOption";
 import Returns from "./pages/account/Returns";
 import Cancellations from "./pages/account/Cancellations";
 import Checkout from "./pages/Checkout";
+import Policy from "./pages/Policy";
+import Terms from "./pages/Terms";
+import Faq from "./pages/Faq";
 
 
 
@@ -42,6 +45,10 @@ function App() {
         <Route path="/shop/:id" element={<ProductDetails/>}/>
         <Route path="/wishlist" element={<WishList/>}/>
         <Route path="/checkout" element={<Checkout/>}/>
+        {/* quick links */}
+        <Route path="/privacy" element={<Policy/>}/>
+        <Route path="/terms" element={<Terms/>}/>
+        <Route path="/faq" element={<Faq/>}/>
         {/* account routes */}
         <Route  element={<ProfileOutlet/>}>
           <Route path="/profile" element={<Profile/>}/>
