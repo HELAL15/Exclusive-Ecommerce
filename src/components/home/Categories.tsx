@@ -9,7 +9,7 @@ import SecTitle from "../global/SecTitle";
 // imgs
 import phone from '../../assets/Category-CellPhone.png'
 import computer from '../../assets/Category-Computer.png'
-import smartwatch from '../../assets/Category-Smartwatch.png'
+import smartwatch from '../../assets/Category-SmartWatch.png'
 import camera from '../../assets/Category-Camera.png'
 import headphone from '../../assets/Category-Headphone.png'
 import gaming from '../../assets/Category-Gamepad.png'
