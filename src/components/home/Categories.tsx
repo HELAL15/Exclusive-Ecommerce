@@ -9,7 +9,6 @@ import SecTitle from "../global/SecTitle";
 // imgs
 import phone from '../../assets/Category-CellPhone.png'
 import computer from '../../assets/Category-Computer.png'
-import smartwatch from '../../assets/Category-SmartWatch.png'
 import camera from '../../assets/Category-Camera.png'
 import headphone from '../../assets/Category-Headphone.png'
 import gaming from '../../assets/Category-Gamepad.png'
@@ -30,8 +29,8 @@ const categories = [
   },
   {
     id:3,
-    title:"smart watch",
-    img: smartwatch
+    title:"headphones",
+    img: headphone
   },
   {
     id:4,
@@ -50,8 +49,8 @@ const categories = [
   },
   {
     id:7,
-    title:"smart watch",
-    img: smartwatch
+    title:"headphones",
+    img: headphone
   },
   {
     id:8,
