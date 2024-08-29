@@ -24,6 +24,7 @@ import Checkout from "./pages/Checkout";
 import Policy from "./pages/Policy";
 import Terms from "./pages/Terms";
 import Faq from "./pages/Faq";
+import Test from "./pages/Test";
 
 
 
@@ -45,6 +46,8 @@ function App() {
         <Route path="/shop/:id" element={<ProductDetails/>}/>
         <Route path="/wishlist" element={<WishList/>}/>
         <Route path="/checkout" element={<Checkout/>}/>
+        {/* test page */}
+        <Route path="/test" element={<Test/>}/> 
         {/* quick links */}
         <Route path="/privacy" element={<Policy/>}/>
         <Route path="/terms" element={<Terms/>}/>

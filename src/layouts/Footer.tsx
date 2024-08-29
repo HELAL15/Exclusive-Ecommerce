@@ -8,6 +8,7 @@ import { RiFacebookLine, RiLinkedinLine } from "react-icons/ri";
 import { FaXTwitter } from "react-icons/fa6";
 import { VscSend } from "react-icons/vsc";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 /**
  * ==> props interface
@@ -35,6 +36,7 @@ const Footer: FC<IProps> = ({  }) => {
     setMail('')
   }
 
+  const {t} = useTranslation()
 
   return (
     <>
@@ -44,21 +46,21 @@ const Footer: FC<IProps> = ({  }) => {
           <div className="footer-col">
             <h3 className="text-primary-white font-medium text-xl">exclusive</h3>
             <div>
-              <h3 className="text-primary-white my-4">subscribe</h3>
-              <p className="text-primary-white text-sm font-normal mb-2">Get 10% off your first order</p>
+              <h3 className="text-primary-white my-4">{t("footer.subscribe.title")}</h3>
+              <p className="text-primary-white text-sm font-normal mb-2">{t("footer.subscribe.subtitle")}</p>
               <form 
                 onSubmit={handleSubmitMail}
                 action="" className="flex w-full md:w-[200px] items-center text-primary-white justify-between border border-light px-4 py-2 rounded-[4px]">
                 <input
                   onChange={handleMailChange}
                   value={mail}
-                  type="email" placeholder="Enter your email" className="bg-transparent w-3/4 text-primary-white placeholder:text-sm border-0 outline-0 focus:border-0 focus:outline-0" />
+                  type="email" placeholder={t("footer.subscribe.mail")} className="bg-transparent w-3/4 text-primary-white placeholder:text-sm border-0 outline-0 focus:border-0 focus:outline-0" />
                 <button type="submit" className="text-lg text-primary-white "><VscSend /></button>
               </form>
             </div>
           </div>
           <div className="footer-col">
-            <h3 className="text-white font-medium text-xl">support</h3>
+            <h3 className="text-white font-medium text-xl">{t("footer.support")}</h3>
             <ul className="footer-links flex flex-col gap-4 mt-4">
               <li className="footer-item">
                 <Link target="_blank" to="https://111 Bijoy sarani, Dhaka,  DH 1515, Bangladesh." className="footer-link ">111 Bijoy sarani, Dhaka,  DH 1515, Bangladesh.</Link>
@@ -72,47 +74,47 @@ const Footer: FC<IProps> = ({  }) => {
             </ul>
           </div>
           <div className="footer-col">
-            <h3 className="text-white font-medium text-xl">account</h3>
+            <h3 className="text-white font-medium text-xl">{t("footer.account.title")}</h3>
             <ul className="footer-links flex flex-col gap-4 mt-4">
               <li className="footer-item">
-                <NavLink to="/profile" className="footer-link ">my account</NavLink>
+                <NavLink to="/profile" className="footer-link ">{t("footer.account.links.myAccount")}</NavLink>
               </li>
               <li className="footer-item">
-                <NavLink to="/login" className="footer-link ">login / sign up</NavLink>
+                <NavLink to="/login" className="footer-link ">{t("footer.account.links.login")}</NavLink>
               </li>
               <li className="footer-item">
-                <NavLink to="/cart" className="footer-link ">cart</NavLink>
+                <NavLink to="/cart" className="footer-link ">{t("footer.account.links.cart")}</NavLink>
               </li>
               <li className="footer-item">
-                <NavLink to="/wishlist" className="footer-link ">whishlist</NavLink>
+                <NavLink to="/wishlist" className="footer-link ">{t("footer.account.links.wishlist")}</NavLink>
               </li>
               <li className="footer-item">
-                <NavLink to="/shop" className="footer-link ">shop</NavLink>
+                <NavLink to="/shop" className="footer-link ">{t("footer.account.links.shop")}</NavLink>
               </li>
             </ul>
           </div>
           <div className="footer-col">
-            <h3 className="text-white font-medium text-xl">quick links</h3>
+            <h3 className="text-white font-medium text-xl">{t("footer.quick.title")}</h3>
             <ul className="footer-links flex flex-col gap-4 mt-4">
               <li className="footer-item">
-                <NavLink to="/privacy" className="footer-link ">privacy policy</NavLink>
+                <NavLink to="/privacy" className="footer-link ">{t("footer.quick.links.privacy")}</NavLink>
               </li>
               <li className="footer-item">
-                <NavLink to="/terms" className="footer-link ">terms of us</NavLink>
+                <NavLink to="/terms" className="footer-link ">{t("footer.quick.links.terms")}</NavLink>
               </li>
               <li className="footer-item">
-                <NavLink to="/faq" className="footer-link ">FAQ</NavLink>
+                <NavLink to="/faq" className="footer-link ">{t("footer.quick.links.faq")}</NavLink>
               </li>
               <li className="footer-item">
-                <NavLink to="/contact" className="footer-link ">contact</NavLink>
+                <NavLink to="/contact" className="footer-link ">{t("footer.quick.links.contact")}</NavLink>
               </li>
             </ul>
           </div>
           <div className="footer-col">
-            <h3 className="text-white font-bold text-xl">download app</h3>
+            <h3 className="text-white font-bold text-xl">{t("footer.download.title")}</h3>
             <ul className="footer-links flex flex-col gap-4 mt-4">
               <li>
-                <p className="text-slate-400 text-sm">save $3 with app new user only</p>
+                <p className="text-slate-400 text-sm">{t("footer.download.subtitle")}</p>
                 <div className="flex items-center gap-4 mt-4">
                   <img src={qr} alt="" />
                   <div className="flex flex-col gap-4">

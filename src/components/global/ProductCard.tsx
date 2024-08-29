@@ -37,7 +37,7 @@ const ProductCard: FC<IProps> = ({  }) => {
   return (
     <>
       <div className="card rounded-[4px] relative group">
-        <div className="absolute right-3 top-3 z-20 flex flex-col gap-2">
+        <div className="absolute rtl:left-3 ltr:right-3 top-3 z-20 flex flex-col gap-2">
           <button onClick={handleFav} className={`rounded-full w-[32px] h-[32px] grid place-items-center duration-300 hover:text-primary-white hover:bg-accent ${isFav ? 'bg-accent text-primary-white' : 'bg-primary-white'} `}><FaRegHeart /></button>
           <Link to={`/shop/${1}`} onClick={handleCart} className="rounded-full text-lg font-semibold duration-300 hover:text-primary-white hover:bg-accent w-[32px] h-[32px] grid place-items-center bg-primary-white"><IoEyeOutline /></Link>
         </div>

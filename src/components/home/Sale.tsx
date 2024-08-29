@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import ProductCard from "../global/ProductCard";
 import SwiperNav from "../global/SwiperNav";
+import { swiperDir } from "../globalVars";
 
 /**
  * ==> props interface
@@ -28,12 +29,13 @@ const Sale: FC<IProps> = ({  }) => {
             <SwiperNav swiper={swiperInstance} />
           </div>
         </div>
-        <div className="relative px-4 md:px-0 md:pl-[30px] lg:pl-[125px] xl:pl-[160px]">
+        <div className="relative px-4 md:px-0 rtl:md:pr-[30px] rtl:lg:pr-[125px] rtl:xl:pr-[160px] ltr:md:pl-[30px] ltr:lg:pl-[125px] ltr:xl:pl-[160px]">
           <Swiper
             onSwiper={setSwiperInstance}
             modules={[Autoplay]}
             slidesPerView={1}
             spaceBetween={15}
+            dir={swiperDir}
             loop={true}
             autoplay={{
               delay: 2500, 

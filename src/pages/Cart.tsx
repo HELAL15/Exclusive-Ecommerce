@@ -38,7 +38,7 @@ const Cart: FC<IProps> = () => {
                 <div className="text-base font-normal grid grid-cols-4 items-center text-center rounded shadow-shadow px-4 py-4">
                   <div className="flex items-center justify-center gap-3">
                     <div className="relative w-[50px] h-[50px]">
-                    <button className="absolute -top-[3px] -left-[3px] w-[18px] h-[18px] grid place-items-center btn-primary rounded-full" >
+                    <button className="absolute -top-[3px] rtl:-right-[3px] ltr:-left-[3px] w-[18px] h-[18px] grid place-items-center btn-primary rounded-full" >
                     <IoCloseSharp />
                     </button>
                     <img className="w-full h-full object-contain" src={product} alt="" />
@@ -52,7 +52,7 @@ const Cart: FC<IProps> = () => {
                 <div className="text-base font-normal grid grid-cols-4 items-center text-center rounded shadow-shadow px-4 py-4">
                   <div className="flex items-center justify-center gap-3">
                     <div className="relative w-[50px] h-[50px]">
-                    <button className="absolute -top-[3px] -left-[3px] w-[18px] h-[18px] grid place-items-center btn-primary rounded-full" >
+                    <button className="absolute -top-[3px] rtl:-right-[3px] ltr:-left-[3px] w-[18px] h-[18px] grid place-items-center btn-primary rounded-full" >
                     <IoCloseSharp />
                     </button>
                     <img className="w-full h-full object-contain" src={product} alt="" />
@@ -66,7 +66,7 @@ const Cart: FC<IProps> = () => {
                 <div className="text-base font-normal grid grid-cols-4 items-center text-center rounded shadow-shadow px-4 py-4">
                   <div className="flex items-center justify-center gap-3">
                     <div className="relative w-[50px] h-[50px]">
-                    <button className="absolute -top-[3px] -left-[3px] w-[18px] h-[18px] grid place-items-center btn-primary rounded-full" >
+                    <button className="absolute -top-[3px] rtl:-right-[3px] ltr:-left-[3px] w-[18px] h-[18px] grid place-items-center btn-primary rounded-full" >
                     <IoCloseSharp />
                     </button>
                     <img className="w-full h-full object-contain" src={product} alt="" />

@@ -3,8 +3,8 @@ import axios from 'axios';
 // import Cookies from 'js-cookie';
 
 
-// Initial language from localStorage or default to 'ar'
-const lang = localStorage.getItem("i18nextLng") || 'ar';
+// Initial language from localStorage or default to 'en'
+const lang = localStorage.getItem("i18nextLng") || 'en';
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const request = axios.create({

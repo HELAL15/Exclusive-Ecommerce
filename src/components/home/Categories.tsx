@@ -12,6 +12,7 @@ import computer from '../../assets/Category-Computer.png'
 import camera from '../../assets/Category-Camera.png'
 import headphone from '../../assets/Category-Headphone.png'
 import gaming from '../../assets/Category-Gamepad.png'
+import { swiperDir } from "../globalVars";
 
 
 
@@ -91,6 +92,7 @@ const Categories: FC<IProps> = ({}) => {
             modules={[Autoplay]}
             slidesPerView={2}
             spaceBetween={15}
+            dir={swiperDir}
             loop={true}
             autoplay={{
               delay: 2500,

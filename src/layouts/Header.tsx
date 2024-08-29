@@ -6,6 +6,9 @@ import { LuUser } from "react-icons/lu";
 import { Select } from "antd";
 import Marquee from "react-fast-marquee";
 import MobileMenu from "../components/header/MobileMenu";
+import i18next from "i18next";
+import { marqueeDir } from "../components/globalVars";
+import { useTranslation } from "react-i18next";
 
 /**
  * ==> props interface
@@ -18,6 +21,8 @@ interface IProps {
  * ==> Component
  */
 const Header: FC<IProps> = ({  }) => {
+  
+  const {t} = useTranslation()
 
   const [isOpen , setOpen] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
@@ -45,7 +50,9 @@ const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
   const {Option} = Select
 
   const handleOptionChange = (value: any) => {
+    i18next.changeLanguage(value);
     window.location.reload();
+    navigate(location.pathname , {replace: true})
     console.log(`selected ${value}`)
   }
 
@@ -55,7 +62,7 @@ const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
         <div className="container relative">
           <div className="flex items-center justify-start md:justify-center  ">
             <div className="w-3/4 md:w-1/2">
-            <Marquee pauseOnHover >
+            <Marquee pauseOnHover direction={marqueeDir} >
               <div className="flex items-center justify-center gap-2 ">
                 <p className="text-sm font-normal text-primary-white">
                   Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
@@ -66,13 +73,13 @@ const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
             </div>
           </div>
           <Select
-            defaultValue="en"
+            defaultValue={localStorage.getItem("i18nextLng") || 'en'}
             style={{ width: 90 , height:24 }}
             onChange={handleOptionChange}
-            className="absolute right-0 top-1/2 -translate-y-1/2 select-lang"
+            className="absolute rtl:left-0 ltr:right-0 top-1/2 -translate-y-1/2 select-lang"
             >
-            <Option value="en">english</Option>
-            <Option value="ar">arabic</Option>
+            <Option value="en">{t("topHeader.lang.en")}</Option>
+            <Option value="ar">{t("topHeader.lang.ar")}</Option>
           </Select>
         </div>
       </header>
@@ -85,19 +92,22 @@ const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
             <nav className="nav hidden lg:block">
               <ul className="flex items-center gap-5 xl:gap-8">
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/">home</NavLink>
+                  <NavLink className="nav-link" to="/">{t("header.nav.home")}</NavLink>
+                </li>
+                {/* <li className="nav-item">
+                  <NavLink className="nav-link" to="/test">test</NavLink>
+                </li> */}
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/shop">{t("header.nav.shop")}</NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/shop">shop</NavLink>
+                  <NavLink className="nav-link" to="/contact">{t("header.nav.contact")}</NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/contact">contact</NavLink>
+                  <NavLink className="nav-link" to="/about">{t("header.nav.about")}</NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/about">about</NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/sign-up">sign up</NavLink>
+                  <NavLink className="nav-link" to="/login">{t("header.nav.login")}</NavLink>
                 </li>
               </ul>
             </nav>
@@ -108,7 +118,7 @@ const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
               <form  onSubmit={handleSubmit} className="hidden lg:flex items-center bg-light px-3 py-2 rounded-[4px]">
                 <input
                   onChange={(e) => setSearchValue(e.target.value)}
-                  value={searchValue} type="search" placeholder="What are you looking for?" className="bg-transparent placeholder:text-sm border-0 outline-0 focus:border-0 focus:outline-0" />
+                  value={searchValue} type="search" placeholder={t("header.search")} className="bg-transparent placeholder:text-sm border-0 outline-0 focus:border-0 focus:outline-0" />
                 <button type="submit" className="text-xl "><FaSearch /></button>
               </form>
               <NavLink className=" text-lg md:text-xl font-medium " to={'/wishlist'}>

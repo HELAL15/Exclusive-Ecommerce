@@ -8,7 +8,7 @@ export default function MainSection() {
     <section className="pt-0">
       <div className="">
         <div className=" grid grid-cols-1 lg:grid-cols-2 items-center gap-4">
-            <div className="container w-full md:pl-8 lg:pl-32 xl:pl-40 lg:pr-4 xl:pr-10  space-y-5">
+            <div className="container w-full rtl:md:pr-8 rtl:lg:pr-32 rtl:xl:pr-40 rtl:lg:pl-4 rtl:xl:pl-10 ltr:md:pl-8 ltr:lg:pl-32 ltr:xl:pl-40 ltr:lg:pr-4 ltr:xl:pr-10  space-y-5">
               <h2 className="text-[54px] font-semibold font-inter  tracking-wider">
                 Our Story
               </h2>

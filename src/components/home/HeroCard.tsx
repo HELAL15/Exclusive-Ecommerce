@@ -18,7 +18,7 @@ const HeroCard: FC<IProps> = ({  }) => {
   return (
     <>
       <div className="card grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-        <div className="content space-y-4 md:pl-8 lg:pl-14">
+        <div className="content space-y-4 rtl:md:pr-8 rtl:lg:pr-14 ltr:md:pl-8 ltr:lg:pl-14">
           <div className="flex items-center gap-6">
             <img src={apple} alt="" className="w-[40px] h-[40px] object-contain" />
             <span className="text-sm font-semibold text-primary-white">iPhone 14 Series</span>

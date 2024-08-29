@@ -18,8 +18,16 @@ const SwiperNav: FC<IProps> = ({ swiper }) => {
 
   return (
     <div className="flex items-center gap-2">
-      <button className="w-[40px] h-[40px] hover:bg-accent hover:text-primary-white duration-300 rounded-full bg-light grid place-items-center" onClick={() => swiper.slideNext()}><FaArrowLeftLong /></button>
-      <button className="w-[40px] h-[40px] hover:bg-accent hover:text-primary-white duration-300 rounded-full bg-light grid place-items-center" onClick={() => swiper.slidePrev()}><FaArrowRightLong /></button>
+      <button className="w-[40px] h-[40px] hover:bg-accent hover:text-primary-white duration-300 rounded-full bg-light grid place-items-center" onClick={() => swiper.slideNext()}>
+        <i className="rtl:-scale-100">
+          <FaArrowLeftLong />
+        </i>
+      </button>
+      <button className="w-[40px] h-[40px] hover:bg-accent hover:text-primary-white duration-300 rounded-full bg-light grid place-items-center" onClick={() => swiper.slidePrev()}>
+        <i className="rtl:-scale-100">
+          <FaArrowRightLong />
+        </i>
+      </button>
     </div>
   );
 }

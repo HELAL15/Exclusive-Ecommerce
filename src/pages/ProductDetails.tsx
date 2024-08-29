@@ -76,12 +76,12 @@ const ProductDetails: FC<IProps> = () => {
             <div className="col-span-12 md:col-span-5 space-y-3 divide-y divide-slate-300 lg:px-8 xl:px-12">
               <div className="space-y-3 pb-5">
                 <h3 className="text-2xl font-semibold">Havic HV G-92 Gamepad</h3>
-                <div className="divide divide-x divide-slate-300 flex items-center flex-wrap gap-1 md:gap-2">
+                <div className=" ltr:divide-x divide-slate-300 flex items-center flex-wrap gap-1 md:gap-2">
                   <div className="rate flex items-center gap-1 md:gap-2">
                     <Rate disabled value={4} />
                     <span className="text-slate-400 text-sm font-normal" >(150 reviews)</span>
                   </div>
-                  <div className="text-green text-sm font-medium pl-1 md:pl-2">in stock</div>
+                  <div className="text-green text-sm font-medium rtl:pr-1 rtl:md:pr-2 ltr:pl-1 ltr:md:pl-2 rtl:border-r rtl:border-slate-300">in stock</div>
                 </div>
                 <p className="text-2xl font-normal">$ 192.00</p>
                 <p className="text-sm font-normal">
