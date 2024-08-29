@@ -55,7 +55,9 @@
     "address" : "address",
     "payment-option" : "payment options",
     "returns" : "returns",
-    "cancellation" : "cancellation"
-
+    "cancellation" : "cancellation",
+    "privacy" : "privacy",
+    "terms" : "terms",
+    "faq" : "FAQ"
   }
 }
