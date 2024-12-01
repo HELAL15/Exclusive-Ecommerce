@@ -2,6 +2,9 @@ import { FC, memo } from "react";
 import { Outlet } from "react-router";
 import BreadCrumb from "../../components/global/BreadCrumb";
 import { NavLink } from "react-router-dom";
+import { TbLogout } from "react-icons/tb";
+import { MdDelete } from "react-icons/md";
+import { request } from "../../api/request";
 
 /**
  * ==> props interface
@@ -14,6 +17,22 @@ interface IProps {
  * ==> Component
  */
 const ProfileOutlet: FC<IProps> = ({  }) => {
+
+
+
+  const handleLogout = async ()=>{
+    try {
+      const res = await request.post('user/user-logout')
+      console.log(res);
+      
+    }catch(err:any){
+      console.log(err);
+      
+    }
+  }
+
+
+
   return (
     <>
       <BreadCrumb/>
@@ -35,6 +54,20 @@ const ProfileOutlet: FC<IProps> = ({  }) => {
                   <NavLink end className="profile-link" to={'/profile/returns'}>my returns</NavLink>
                   <NavLink end className="profile-link" to={'/profile/cancellation'}>my cancellation</NavLink>
                 </div>
+              </div>
+              <div className="flex flex-col gap-1 mt-3">
+                <button 
+                className="text-black font-bold 
+                text-lg my-2 flex items-center gap-2" 
+                onClick={handleLogout}
+                >
+                  logout
+                  <TbLogout />
+                </button>
+                <button className="text-accent font-bold text-lg my-2 flex items-center gap-2" >
+                  delete account
+                  <MdDelete />
+                </button>
               </div>
             </div>
             <div className="col-span-12 md:col-span-9 shadow-shadow ">

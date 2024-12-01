@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import ProductCard from "../global/ProductCard";
 import SwiperNav from "../global/SwiperNav";
-import { swiperDir } from "../globalVars";
+import { swiperDir } from "../../constants";
 
 /**
  * ==> props interface

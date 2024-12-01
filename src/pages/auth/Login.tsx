@@ -1,8 +1,15 @@
-import { FC, memo } from "react";
+import { FC, memo, useState } from "react";
 import login from "../../assets/login.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
+import { request } from "../../api/request";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/features/UserSlice";
+import { setToken } from "../../helpers/Utils";
+import { Spin } from "antd";
+
+
 
 /**
  * ==> Form data interface
@@ -10,24 +17,51 @@ import { toast } from "react-toastify";
 interface IFormInput {
   email: string;
   password: string;
+  account_type: string;
 }
 
 /**
  * ==> Component
  */
 const Login: FC = () => {
+
+   
+  const [loading , setLoading] = useState(false)
+
+
+  const navigate = useNavigate();
+
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<IFormInput>();
+  } = useForm<IFormInput>({mode: 'onChange'});
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
-    toast.success("Login successful.");
-    reset();
+const dispatch = useDispatch();
+
+
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+
+    try{
+      setLoading(true)
+      const res = await request.post('user/login' , data);
+      setLoading(false)
+      toast.success(res.data.message)
+      await dispatch(setUser(res?.data.data));
+      const accessToken = res?.data.data.token
+       request.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+      await setToken('accessToken',accessToken)
+      navigate('/' , {replace:true})
+      reset();
+    }catch(err:any){
+      setLoading(false)
+      toast.error(err.response.data.message)
+    }
   };
+
+
 
   return (
     <>
@@ -42,6 +76,8 @@ const Login: FC = () => {
                 <h2 className="text-2xl font-medium">Log in to Exclusive</h2>
                 <p className="text-base">Enter your details below</p>
               </div>
+             
+              <Spin size="large" spinning={loading} >
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid grid-cols-12 gap-4">
                   <div className="col-span-12">
@@ -91,16 +127,34 @@ const Login: FC = () => {
                     )}
                   </div>
                   <div className="col-span-12 flex items-center justify-between">
-                    <button className="w-fit btn btn-primary">Login</button>
+                    <button 
+                    disabled={loading} 
+                    className="w-fit  min-w-[150px] btn btn-primary
+                     disabled:bg-slate-500 
+                     disabled:cursor-not-allowed 
+                     ">
+                      {loading ? 'loading...' :'Login'}
+                      </button>
                     <Link
-                      className="text-accent font-normal"
+                      className="text-accent hover:text-accent font-normal underline"
                       to={"/forget-password"}
                     >
                       Forgot password?
                     </Link>
                   </div>
+                  <input type="hidden" value={'user'} {...register("account_type") } />
+                    <p className="flex items-center justify-center gap-2 w-full col-span-12">
+                      <span>dont have account?</span>
+                      <Link
+                        className="text-accent hover:text-accent font-normal underline"
+                        to={"/sign-up"}
+                      >
+                        create account
+                      </Link>
+                    </p>
                 </div>
               </form>
+              </Spin>
             </div>
           </div>
         </div>

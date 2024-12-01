@@ -25,6 +25,10 @@ import Policy from "./pages/Policy";
 import Terms from "./pages/Terms";
 import Faq from "./pages/Faq";
 import Test from "./pages/Test";
+import ProtectedRoutes from "./helpers/ProtectedRoutes";
+import ReqiuerBack from "./helpers/ReqiuerBack";
+import { useDispatch } from "react-redux";
+import { fetchSettingsAsync } from "./redux/features/SettingSlice";
 
 
 
@@ -34,6 +38,13 @@ function App() {
   useEffect(()=>{
     window.scrollTo({top:0, left:0 , behavior:"instant"})
   },[location.key])
+
+  const dispatch:any = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchSettingsAsync()); 
+  }, [dispatch]);
+
 
   return (
     <Routes>
@@ -54,18 +65,22 @@ function App() {
         <Route path="/faq" element={<Faq/>}/>
         {/* account routes */}
         <Route  element={<ProfileOutlet/>}>
-          <Route path="/profile" element={<Profile/>}/>
-          <Route path="/profile/address" element={<AddressBook/>}/>
-          <Route path="/profile/payment-option" element={<PaymentOption/>}/>
-          <Route path="/profile/returns" element={<Returns/>}/>
-          <Route path="/profile/cancellation" element={<Cancellations/>}/>
+          <Route element={<ProtectedRoutes/>} >
+            <Route path="/profile" element={<Profile/>}/>
+            <Route path="/profile/address" element={<AddressBook/>}/>
+            <Route path="/profile/payment-option" element={<PaymentOption/>}/>
+            <Route path="/profile/returns" element={<Returns/>}/>
+            <Route path="/profile/cancellation" element={<Cancellations/>}/>
+          </Route>
         </Route>
         {/* auth routes */}
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/sign-up" element={<Register/>}/>
-        <Route path="/forget-password" element={<ForgetPassword/>}/>
-        <Route path="/otp" element={<Otp/>}/>
-        <Route path="/reset-password" element={<ResetPassword/>}/>
+        <Route element={<ReqiuerBack/>} >
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/sign-up" element={<Register/>}/>
+          <Route path="/forget-password" element={<ForgetPassword/>}/>
+          <Route path="/otp" element={<Otp/>}/>
+          <Route path="/reset-password" element={<ResetPassword/>}/>
+        </Route>
         {/* not found page  */}
         <Route path="*" element={<NotFound/>} />
       </Route>

@@ -1,5 +1,7 @@
+
 import { FC, memo } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import useFetch from "../../hooks/useFetch";
 
 /**
  * ==> Props interface
@@ -23,21 +25,33 @@ interface IFormInputs {
  * ==> Component
  */
 const Profile: FC<IProps> = () => {
+
+
+
   const { register, handleSubmit, formState: { errors }, watch } = useForm<IFormInputs>();
 
-  // Watch the values of newPassword and confirmPassword
+
   const newPassword = watch("newPassword");
 
 
   const onSubmit: SubmitHandler<IFormInputs> = data => {
     console.log(data);
-    // Add your submit logic here
+  
   };
 
   const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    // Add your cancel logic here
+   
   };
+
+
+  const {data} = useFetch('user/profile')
+  console.log(data);
+  
+
+
+
+
 
   return (
     <>

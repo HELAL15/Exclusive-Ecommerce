@@ -2,7 +2,6 @@ import { FC, memo } from "react";
 import BreadCrumb from "../components/global/BreadCrumb";
 import ProductCard from "../components/global/ProductCard";
 import { Pagination } from "antd";
-import useFetch from "../hooks/useFetch";
 
 /**
  * ==> props interface
@@ -17,9 +16,6 @@ interface IProps {
 const Shop: FC<IProps> = ({  }) => {
 
 
-  const {data} = useFetch("https://backend.smartvision4p.com/hotel/public/api/rooms")
-
-  console.log(data);
   
   
   return (

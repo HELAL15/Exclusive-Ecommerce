@@ -1,17 +1,24 @@
-import { FC, memo } from "react";
+import { FC, memo, useState } from "react";
 import login from "../../assets/login.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
+import { request } from "../../api/request";
+import { Spin } from "antd";
+import { setToken } from "../../helpers/Utils";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/features/UserSlice";
 
 /**
  * ==> Form data interface
  */
 interface IFormInput {
-  name:string;
+  first_name:string;
+  last_name:string;
   email: string;
   password: string;
-  confirmPassword: string;
+  password_confirmation: string;
+  account_type: string;
 }
 
 /**
@@ -28,10 +35,26 @@ const Register: FC = () => {
 
   const password = watch("password", "");
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
-    toast.success("Registration successful.");
-    reset();
+  const [loading , setLoading] = useState(false)
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    setLoading(true)
+    try{
+      const res = await request.post('user/register' , data);
+      toast.success(res.data.message)
+      setLoading(false)
+      const accessToken = res?.data.data.token
+      setToken('accessToken' , accessToken)
+      dispatch(setUser(res?.data.data))
+      reset();
+      navigate('/')
+    }catch(err:any){
+      setLoading(false)
+      toast.error(err.response.message);
+    }
   };
 
   return (
@@ -53,123 +76,149 @@ const Register: FC = () => {
                   Fill in your details below
                 </p>
               </div>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-12">
-                    <input
-                      type="text"
-                      placeholder="Enter your name"
-                      className={`w-full h-[50px] border-b-2 px-4 text-primary placeholder-gray-500 focus:outline-none ${
-                        errors.name
-                          ? "border-red-500"
-                          : "border-gray-300 focus:border-accent"
-                      }`}
-                      {...register("name", {
-                        required: "name is required",
-                      })}
-                    />
-                    {errors.name && (
-                      <p className="text-red-500 text-sm mt-1">
-                        {errors.name.message}
-                      </p>
-                    )}
-                  </div>
-                  {/* Email Field */}
-                  <div className="col-span-12">
-                    <input
-                      type="email"
-                      placeholder="Enter your email"
-                      className={`w-full h-[50px] border-b-2 px-4 text-primary placeholder-gray-500 focus:outline-none ${
-                        errors.email
-                          ? "border-red-500"
-                          : "border-gray-300 focus:border-accent"
-                      }`}
-                      {...register("email", {
-                        required: "Email is required",
-                        pattern: {
-                          value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                          message: "Please enter a valid email address",
-                        },
-                      })}
-                    />
-                    {errors.email && (
-                      <p className="text-red-500 text-sm mt-1">
-                        {errors.email.message}
-                      </p>
-                    )}
-                  </div>
+              <Spin spinning={loading} size="large" >
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <input type="hidden" defaultValue='user' {...register("account_type")} />
+                  <div className="grid grid-cols-12 gap-4">
+                  <div className="col-span-6">
+                      <input
+                        type="text"
+                        placeholder="first name"
+                        className={`w-full h-[50px] border-b-2 px-4 text-primary placeholder-gray-500 focus:outline-none ${
+                          errors.first_name
+                            ? "border-red-500"
+                            : "border-gray-300 focus:border-accent"
+                        }`}
+                        {...register("first_name", {
+                          required: "first name is required",
+                        })}
+                      />
+                      {errors.first_name && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.first_name.message}
+                        </p>
+                      )}
+                    </div>
+                    <div className="col-span-6">
+                      <input
+                        type="text"
+                        placeholder="last name"
+                        className={`w-full h-[50px] border-b-2 px-4 text-primary placeholder-gray-500 focus:outline-none ${
+                          errors.last_name
+                            ? "border-red-500"
+                            : "border-gray-300 focus:border-accent"
+                        }`}
+                        {...register("last_name", {
+                          required: "name is required",
+                        })}
+                      />
+                      {errors.last_name && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.last_name.message}
+                        </p>
+                      )}
+                    </div>
+                    {/* Email Field */}
+                    <div className="col-span-12">
+                      <input
+                        type="email"
+                        placeholder="Enter your email"
+                        className={`w-full h-[50px] border-b-2 px-4 text-primary placeholder-gray-500 focus:outline-none ${
+                          errors.email
+                            ? "border-red-500"
+                            : "border-gray-300 focus:border-accent"
+                        }`}
+                        {...register("email", {
+                          required: "Email is required",
+                          pattern: {
+                            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                            message: "Please enter a valid email address",
+                          },
+                        })}
+                      />
+                      {errors.email && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.email.message}
+                        </p>
+                      )}
+                    </div>
 
-                  {/* Password Field */}
-                  <div className="col-span-12">
-                    <input
-                      type="password"
-                      placeholder="Password"
-                      className={`w-full h-[50px] border-b-2 px-4 text-primary placeholder-gray-500 focus:outline-none ${
-                        errors.password
-                          ? "border-red-500"
-                          : "border-gray-300 focus:border-accent"
-                      }`}
-                      {...register("password", {
-                        required: "Password is required",
-                        minLength: {
-                          value: 6,
-                          message: "Password must be at least 6 characters",
-                        },
-                      })}
-                    />
-                    {errors.password && (
-                      <p className="text-red-500 text-sm mt-1">
-                        {errors.password.message}
-                      </p>
-                    )}
-                  </div>
+                    {/* Password Field */}
+                    <div className="col-span-12">
+                      <input
+                        type="password"
+                        placeholder="Password"
+                        className={`w-full h-[50px] border-b-2 px-4 text-primary placeholder-gray-500 focus:outline-none ${
+                          errors.password
+                            ? "border-red-500"
+                            : "border-gray-300 focus:border-accent"
+                        }`}
+                        {...register("password", {
+                          required: "Password is required",
+                          minLength: {
+                            value: 6,
+                            message: "Password must be at least 6 characters",
+                          },
+                        })}
+                      />
+                      {errors.password && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.password.message}
+                        </p>
+                      )}
+                    </div>
 
-                  {/* Confirm Password Field */}
-                  <div className="col-span-12">
-                    <input
-                      type="password"
-                      placeholder="Confirm Password"
-                      className={`w-full h-[50px] border-b-2 px-4 text-primary placeholder-gray-500 focus:outline-none ${
-                        errors.confirmPassword
-                          ? "border-red-500"
-                          : "border-gray-300 focus:border-accent"
-                      }`}
-                      {...register("confirmPassword", {
-                        required: "Please confirm your password",
-                        validate: (value) =>
-                          value === password || "Passwords do not match",
-                      })}
-                    />
-                    {errors.confirmPassword && (
-                      <p className="text-red-500 text-sm mt-1">
-                        {errors.confirmPassword.message}
-                      </p>
-                    )}
-                  </div>
+                    {/* Confirm Password Field */}
+                    <div className="col-span-12">
+                      <input
+                        type="password"
+                        placeholder="Confirm Password"
+                        className={`w-full h-[50px] border-b-2 px-4 text-primary placeholder-gray-500 focus:outline-none ${
+                          errors.password_confirmation
+                            ? "border-red-500"
+                            : "border-gray-300 focus:border-accent"
+                        }`}
+                        {...register("password_confirmation", {
+                          required: "Please confirm your password",
+                          validate: (value) =>
+                            value === password || "Passwords do not match",
+                        })}
+                      />
+                      {errors.password_confirmation && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.password_confirmation.message}
+                        </p>
+                      )}
+                    </div>
 
-                  {/* Submit Button and Login Link */}
-                  <div className="col-span-12 flex items-center justify-between mt-4">
-                    <button
-                      type="submit"
-                      className="btn btn-primary w-full"
-                    >
-                      create account
-                    </button>
-                    
+                    {/* Submit Button and Login Link */}
+                    <div className="col-span-12 flex items-center justify-between mt-4">
+                      <button
+                        type="submit"
+                        className="w-fit  min-w-[150px] btn btn-primary
+                      disabled:bg-slate-500 
+                      disabled:cursor-not-allowed"
+                        disabled={loading}
+                        
+                      >
+                        {loading ? <Spin /> :'create account'}
+                      </button>
+                      
+                    </div>
+                    <div className="col-span-12 flex items-center justify-center gap-2">
+                      <p className="text-base">
+                        Already have an account?
+                      </p>
+                      <Link
+                        className="text-sm font-medium underline"
+                        to={"/login"}
+                      >
+                        Login
+                      </Link>
+                    </div>
                   </div>
-                  <div className="col-span-12 flex items-center justify-center gap-2">
-                    <p className="text-base">
-                      Already have an account?
-                    </p>
-                    <Link
-                      className="text-sm font-medium underline"
-                      to={"/login"}
-                    >
-                      Login
-                    </Link>
-                  </div>
-                </div>
-              </form>
+                </form>
+              </Spin>
             </div>
           </div>
         </div>

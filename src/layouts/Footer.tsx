@@ -9,6 +9,8 @@ import { FaXTwitter } from "react-icons/fa6";
 import { VscSend } from "react-icons/vsc";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 /**
  * ==> props interface
@@ -36,7 +38,27 @@ const Footer: FC<IProps> = ({  }) => {
     setMail('')
   }
 
-  const {t} = useTranslation()
+  const {t , i18n} = useTranslation()
+
+  const lang = i18n.language
+
+
+  const {setting} = useSelector((state:RootState)=>state.setting)
+
+
+
+  
+  const {
+    facebook_link :facebook ,
+    twitter_link :twitter,
+    instagram_link :instagram,
+    mobile,
+     email,
+     [`address_${lang}`] : address,
+ } = setting
+
+  
+
 
   return (
     <>
@@ -63,19 +85,19 @@ const Footer: FC<IProps> = ({  }) => {
             <h3 className="text-white font-medium text-xl">{t("footer.support")}</h3>
             <ul className="footer-links flex flex-col gap-4 mt-4">
               <li className="footer-item">
-                <Link target="_blank" to="https://111 Bijoy sarani, Dhaka,  DH 1515, Bangladesh." className="footer-link ">111 Bijoy sarani, Dhaka,  DH 1515, Bangladesh.</Link>
+                <Link target="_blank" to={address} className="footer-link ">{address}</Link>
               </li>
               <li className="footer-item">
-                <Link target="_blank" to="mailto:exclusive@gmail.com" className="footer-link ">exclusive@gmail.com</Link>
+                <Link target="_blank" to={`mailto:${email}`} className="footer-link ">{email}</Link>
               </li>
               <li className="footer-item">
-                <Link target="_blank" to="tel:+88015-88888-9999" className="footer-link ">+88015-88888-9999</Link>
+                <Link target="_blank" to={`tel:${mobile}`} className="footer-link ">{mobile}</Link>
               </li>
             </ul>
           </div>
           <div className="footer-col">
             <h3 className="text-white font-medium text-xl">{t("footer.account.title")}</h3>
-            <ul className="footer-links flex flex-col gap-4 mt-4">
+            <ul className="footer-links flex flex-col gap-4 mt-4 columns-2 ">
               <li className="footer-item">
                 <NavLink to="/profile" className="footer-link ">{t("footer.account.links.myAccount")}</NavLink>
               </li>
@@ -128,11 +150,11 @@ const Footer: FC<IProps> = ({  }) => {
                 </div>
               </li>
               <li className="footer-link flex items-center gap-5">
-                <Link target="_blank" to="www.facebook.com" className="text-white text-3xl mt-2 ">
+                <Link target="_blank" to={facebook} className="text-white text-3xl mt-2 ">
                   <RiFacebookLine />
                 </Link>
-                <Link target="_blank" to="www.x.com" className="text-white text-3xl mt-2 "><FaXTwitter /></Link>
-                <Link target="_blank" to="www.instagram.com" className="text-white text-3xl mt-2 ">
+                <Link target="_blank" to={twitter} className="text-white text-3xl mt-2 "><FaXTwitter /></Link>
+                <Link target="_blank" to={instagram} className="text-white text-3xl mt-2 ">
                   <FaInstagram />
                 </Link>
                 <Link target="_blank" to="www.linkedin.com" className="text-white text-3xl mt-2 "><RiLinkedinLine /></Link>

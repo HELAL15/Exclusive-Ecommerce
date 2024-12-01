@@ -11,7 +11,7 @@ function Contact() {
       <BreadCrumb/>
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-12 md:items-stretch gap-[30px] ">
-          <div className="py-8 px-5 col-span-12 md:col-span-3 rounded shadow-shadow space-y-8 divide-y divide-slate-300">
+          <div className="py-8 px-5 max-md:flex col-span-12 lg:col-span-3 rounded shadow-shadow space-y-8 divide-y divide-slate-300">
             <div className="  space-y-4">
               <div className=" flex gap-4 items-center ">
                 <span className="w-[40px] h-[40px] bg-accent text-white rounded-full grid place-items-center">
@@ -38,7 +38,7 @@ function Contact() {
               <Link to={`mailto:1ahmedhelal1@gmail.com`} className="block text-sm ">Emails: customer@exclusive.com</Link>
             </div>
           </div>
-          <div className="py-8 px-4 lg:px-8 col-span-12 md:col-span-9 rounded shadow-shadow ">
+          <div className="py-8 px-4 lg:px-8 col-span-12 lg:col-span-9 rounded shadow-shadow ">
             <ContactForm />
           </div>
         </div>

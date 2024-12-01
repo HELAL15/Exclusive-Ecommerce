@@ -6,64 +6,60 @@ import SwiperNav from "../global/SwiperNav";
 import SecTitle from "../global/SecTitle";
 
 
-// imgs
-import phone from '../../assets/Category-CellPhone.png'
-import computer from '../../assets/Category-Computer.png'
-import camera from '../../assets/Category-Camera.png'
-import headphone from '../../assets/Category-Headphone.png'
-import gaming from '../../assets/Category-Gamepad.png'
-import { swiperDir } from "../globalVars";
+import { swiperDir } from "../../constants";
+import useFetch from "../../hooks/useFetch";
+import { useTranslation } from "react-i18next";
 
 
 
 
-const categories = [
-  {
-    id: 1,
-    title: "phones",
-    img: phone
-  },
-  {
-    id: 2,
-    title: "computers",
-    img: computer
-  },
-  {
-    id:3,
-    title:"headphones",
-    img: headphone
-  },
-  {
-    id:4,
-    title:"camera",
-    img: camera
-  },
-  {
-    id:5,
-    title:"headphones",
-    img: headphone
-  },
-  {
-    id:6,
-    title:"gaming",
-    img: gaming
-  },
-  {
-    id:7,
-    title:"headphones",
-    img: headphone
-  },
-  {
-    id:8,
-    title:"camera",
-    img: camera
-  },
-  {
-    id:9,
-    title:"headphones",
-    img: headphone
-  },
-]
+// const categories = [
+//   {
+//     id: 1,
+//     title: "phones",
+//     img: phone
+//   },
+//   {
+//     id: 2,
+//     title: "computers",
+//     img: computer
+//   },
+//   {
+//     id:3,
+//     title:"headphones",
+//     img: headphone
+//   },
+//   {
+//     id:4,
+//     title:"camera",
+//     img: camera
+//   },
+//   {
+//     id:5,
+//     title:"headphones",
+//     img: headphone
+//   },
+//   {
+//     id:6,
+//     title:"gaming",
+//     img: gaming
+//   },
+//   {
+//     id:7,
+//     title:"headphones",
+//     img: headphone
+//   },
+//   {
+//     id:8,
+//     title:"camera",
+//     img: camera
+//   },
+//   {
+//     id:9,
+//     title:"headphones",
+//     img: headphone
+//   },
+// ]
 
 
 
@@ -78,6 +74,17 @@ interface IProps {}
  */
 const Categories: FC<IProps> = ({}) => {
   const [swiperInstance, setSwiperInstance] = useState<any>(null);
+
+  const {data} = useFetch('categorys?in_home=true')
+
+  const categories = data?.data?.data
+
+
+  const {i18n} = useTranslation()
+
+
+  const lang = i18n.language
+  
 
   return (
     <>
@@ -118,9 +125,9 @@ const Categories: FC<IProps> = ({}) => {
             }}
           >
             {
-              categories.map((category)=>(
+              categories?.map((category:any)=>(
                 <SwiperSlide key={category.id}>
-                  <CategoryCard id={category.id} title={category.title} img={category.img} />
+                  <CategoryCard id={category.id} title={category[`title_${lang}`]} img={category.category_image} />
                 </SwiperSlide>
             ))}
           </Swiper>

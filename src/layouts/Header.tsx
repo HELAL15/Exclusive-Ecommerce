@@ -7,8 +7,11 @@ import { Select } from "antd";
 import Marquee from "react-fast-marquee";
 import MobileMenu from "../components/header/MobileMenu";
 import i18next from "i18next";
-import { marqueeDir } from "../components/globalVars";
+import { marqueeDir } from "../constants";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import { getToken } from "../helpers/Utils";
 
 /**
  * ==> props interface
@@ -22,6 +25,9 @@ interface IProps {
  */
 const Header: FC<IProps> = ({  }) => {
   
+
+
+
   const {t} = useTranslation()
 
   const [isOpen , setOpen] = useState<boolean>(false);
@@ -47,14 +53,16 @@ const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
 
 
 
-  const {Option} = Select
+  const {Option} = Select;
 
   const handleOptionChange = (value: any) => {
     i18next.changeLanguage(value);
-    window.location.reload();
+    // window.location.reload();
     navigate(location.pathname , {replace: true})
-    console.log(`selected ${value}`)
   }
+
+  const {isAuthenticated} = useSelector((state:RootState)=> state.user)
+  const token = getToken("accessToken")
 
   return (
     <>
@@ -73,13 +81,13 @@ const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
             </div>
           </div>
           <Select
-            defaultValue={localStorage.getItem("i18nextLng") || 'en'}
+            defaultValue={"en"}
             style={{ width: 90 , height:24 }}
             onChange={handleOptionChange}
             className="absolute rtl:left-0 ltr:right-0 top-1/2 -translate-y-1/2 select-lang"
             >
-            <Option value="en">{t("topHeader.lang.en")}</Option>
-            <Option value="ar">{t("topHeader.lang.ar")}</Option>
+            <Option value="en">english</Option>
+            <Option value="ar">العربية</Option>
           </Select>
         </div>
       </header>
@@ -106,30 +114,39 @@ const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/about">{t("header.nav.about")}</NavLink>
                 </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/login">{t("header.nav.login")}</NavLink>
-                </li>
+                {
+                  !token && !isAuthenticated &&
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/login">{t("header.nav.login")}</NavLink>
+                  </li>
+                
+                }
               </ul>
             </nav>
             <div className="block lg:hidden">
               <MobileMenu isOpen={isOpen} setOpen={setOpen} />
             </div>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-3 md:gap-6">
               <form  onSubmit={handleSubmit} className="hidden lg:flex items-center bg-light px-3 py-2 rounded-[4px]">
                 <input
                   onChange={(e) => setSearchValue(e.target.value)}
                   value={searchValue} type="search" placeholder={t("header.search")} className="bg-transparent placeholder:text-sm border-0 outline-0 focus:border-0 focus:outline-0" />
                 <button type="submit" className="text-xl "><FaSearch /></button>
               </form>
+             
               <NavLink className=" text-lg md:text-xl font-medium " to={'/wishlist'}>
                 <i><FaRegHeart /></i>
               </NavLink>
               <NavLink className="text-lg md:text-xl font-medium relative after:content-['2'] after:text-primary-white after:text-sm after:grid after:place-items-center after:absolute after:-top-2 after:-right-2 after:bg-accent after:w-4 after:h-4 after:rounded-full" to={'/cart'}>
                 <i><AiOutlineShoppingCart /></i>
               </NavLink>
+              {
+                   token && isAuthenticated &&
               <NavLink className="text-lg md:text-xl font-medium" to={'/profile'}>
                 <i><LuUser /></i>
               </NavLink>
+                   
+              }
               <button onClick={handleOpen} className=" block lg:hidden text-lg md:text-xl bg-transparent border-0 outline-0">
               <FaBars />
               </button>

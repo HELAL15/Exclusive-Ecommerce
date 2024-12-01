@@ -3,7 +3,9 @@ import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import HeroCard from "./HeroCard";
 import { Link } from "react-router-dom";
-import { swiperDir } from "../globalVars";
+import { swiperDir } from "../../constants";
+import useFetch from "../../hooks/useFetch";
+import { useTranslation } from "react-i18next";
 
 
 
@@ -19,7 +21,20 @@ interface IProps {
  */
 const Hero: FC<IProps> = ({  }) => {
   
+  const {data:cat} = useFetch('categorys?in_home=true')
+  const {data:hero} = useFetch('banners?in_home=true')
 
+
+  
+
+
+  const categories = cat?.data?.data
+  const banners = hero?.data?.data
+  
+
+  const {i18n} = useTranslation()
+
+  const lang = i18n.language
 
   return (
     <>
@@ -27,16 +42,14 @@ const Hero: FC<IProps> = ({  }) => {
         <div className="container">
           <div className="grid grid-cols-12 gap-4">
             <div className=" hidden lg:flex lg:col-span-3 rtl:border-l ltr:border-r border-slate-300 pt-10 flex-col gap-4">
-
-              <Link to={`/shop?category=${1}`} className="text-base font-medium" >Woman’s Fashion</Link>
-              <Link to={`/shop?category=${2}`} className="text-base font-medium" >Men’s Fashion</Link>
-              <Link to={`/shop?category=${3}`} className="text-base font-medium" >Electronics</Link>
-              <Link to={`/shop?category=${4}`} className="text-base font-medium" >Home & Lifestyle</Link>
-              <Link to={`/shop?category=${5}`} className="text-base font-medium" >Medicine</Link>
-              <Link to={`/shop?category=${6}`} className="text-base font-medium" >Sports & Outdoor</Link>
-              <Link to={`/shop?category=${7}`} className="text-base font-medium" >Baby’s & Toys</Link>
-              <Link to={`/shop?category=${8}`} className="text-base font-medium" >Groceries & Pets</Link>
-              <Link to={`/shop?category=${9}`} className="text-base font-medium" >Health & Beauty</Link>
+                
+              {
+                categories?.map((category:any) => (
+                  <Link to={`/shop?category=${category.id}`} key={category.id} className="">
+                    {category[`title_${lang}`]}
+                  </Link>
+                ))
+              }
             </div>
             <div className="bg-primary col-span-12 lg:col-span-9 rounded px-4 rtl:lg:mr-8 ltr:lg:ml-8 py-8 mt-10">
               <Swiper
@@ -52,18 +65,19 @@ const Hero: FC<IProps> = ({  }) => {
                   }}
 
                 >
-                  <SwiperSlide>
-                    <HeroCard/>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <HeroCard/>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <HeroCard/>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <HeroCard/>
-                  </SwiperSlide>
+                    {
+                    banners?.map((banner:any) => (
+                      <SwiperSlide key={banner.id}>
+                        <HeroCard
+                        link={banner.category_id}
+                         catTitle={banner[`category_title_${lang}`]}
+                          title={banner[`title_${lang}`]} 
+                          img={banner.banner_image}
+                           />
+                      </SwiperSlide>
+                    ))
+                  } 
+
 
 
                 </Swiper>

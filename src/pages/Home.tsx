@@ -9,6 +9,7 @@ import Hero from "../components/home/Hero";
 import Facts from "../components/global/Facts";
 
 
+
 /**
  * ==> props interface
  */
@@ -23,8 +24,13 @@ const Home: FC<IProps> = ({  }) => {
 
 
 
+  
+
   return (
     <>
+    {/* {
+      loading.loading && <div className="fixed top-0 left-0 grid place-items-center w-screen h-screen bg-red-400 z-[9999] " >loading.....</div>
+    } */}
     <Hero/>
     <Sale/>
     <Categories/>
